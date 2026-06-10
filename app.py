@@ -1,21 +1,15 @@
 from flask import Flask, render_template, request, redirect, url_for
 import sqlite3
 import os
-import sys
 
 BASE_DIR = os.path.dirname(os.path.abspath(**file**))
 
-VENDOR_DIR = os.path.join(BASE_DIR, "vendor")
-if os.path.exists(VENDOR_DIR) and VENDOR_DIR not in sys.path:
-sys.path.insert(0, VENDOR_DIR)
-
 application = Flask(**name**)
 
-DB_NAME = os.path.join(BASE_DIR, "database.db")
-application.config["DB_NAME"] = DB_NAME
+DB_PATH = os.path.join(BASE_DIR, "database.db")
 
 def get_connection():
-conn = sqlite3.connect(DB_NAME)
+conn = sqlite3.connect(DB_PATH)
 conn.row_factory = sqlite3.Row
 return conn
 
@@ -25,19 +19,17 @@ cursor = conn.cursor()
 
 ```
 cursor.execute("""
-    CREATE TABLE IF NOT EXISTS buku (
-        id TEXT PRIMARY KEY,
-        judul TEXT NOT NULL,
-        penulis TEXT NOT NULL,
-        penerbit TEXT NOT NULL
-    )
+CREATE TABLE IF NOT EXISTS buku (
+    id TEXT PRIMARY KEY,
+    judul TEXT NOT NULL,
+    penulis TEXT NOT NULL,
+    penerbit TEXT NOT NULL
+)
 """)
 
 conn.commit()
 conn.close()
 ```
-
-# Jalankan saat aplikasi start
 
 init_db()
 
@@ -47,7 +39,7 @@ conn = get_connection()
 cursor = conn.cursor()
 
 ```
-cursor.execute("SELECT * FROM buku ORDER BY id")
+cursor.execute("SELECT * FROM buku")
 container = cursor.fetchall()
 
 conn.close()
@@ -151,9 +143,13 @@ conn.close()
 return redirect(url_for("index"))
 ```
 
+@application.route("/health")
+def health():
+return "OK"
+
 if **name** == "**main**":
 application.run(
 host="0.0.0.0",
-port=int(os.environ.get("PORT", 5000)),
+port=int(os.environ.get("PORT", 8080)),
 debug=False
 )
