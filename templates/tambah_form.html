@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Tambah Data Buku</title>
+
+```
+<link rel="stylesheet"
+href="{{ url_for('static', filename='style.css') }}">
+```
+
+</head>
+
+<body>
+
+<div class="container">
+    <div class="card">
+
+```
+    <h2>➕ Tambah Data Buku</h2>
+
+    <form action="{{ url_for('tambah') }}"
+          method="post">
+
+        <div class="form-group">
+            <label>ID Buku</label>
+            <input type="text"
+                   name="id"
+                   maxlength="4"
+                   required>
+        </div>
+
+        <div class="form-group">
+            <label>Judul Buku</label>
+            <input type="text"
+                   name="judul"
+                   maxlength="40"
+                   required>
+        </div>
+
+        <div class="form-group">
+            <label>Penulis</label>
+            <input type="text"
+                   name="penulis"
+                   maxlength="25"
+                   required>
+        </div>
+
+        <div class="form-group">
+            <label>Penerbit</label>
+            <input type="text"
+                   name="penerbit"
+                   maxlength="30"
+                   required>
+        </div>
+
+        <div class="text-center mt-3">
+
+            <button type="submit"
+                    class="btn btn-primary">
+                Simpan
+            </button>
+
+            <a href="/"
+               class="btn btn-secondary">
+                Kembali
+            </a>
+
+        </div>
+
+    </form>
+
+</div>
+```
+
+</div>
+
+<script src="{{ url_for('static', filename='script.js') }}"></script>
+
+</body>
+</html>

@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Ubah Data Buku</title>
+
+```
+<link rel="stylesheet"
+href="{{ url_for('static', filename='style.css') }}">
+```
+
+</head>
+
+<body>
+
+<div class="container">
+    <div class="card">
+
+```
+    <h2>✏️ Ubah Data Buku</h2>
+
+    <form action="/ubah/{{ buku.id }}"
+          method="post">
+
+        <div class="form-group">
+            <label>ID Buku</label>
+            <input type="text"
+                   name="id"
+                   value="{{ buku.id }}"
+                   readonly>
+        </div>
+
+        <div class="form-group">
+            <label>Judul Buku</label>
+            <input type="text"
+                   name="judul"
+                   value="{{ buku.judul }}"
+                   maxlength="40"
+                   required>
+        </div>
+
+        <div class="form-group">
+            <label>Penulis</label>
+            <input type="text"
+                   name="penulis"
+                   value="{{ buku.penulis }}"
+                   maxlength="25"
+                   required>
+        </div>
+
+        <div class="form-group">
+            <label>Penerbit</label>
+            <input type="text"
+                   name="penerbit"
+                   value="{{ buku.penerbit }}"
+                   maxlength="30"
+                   required>
+        </div>
+
+        <div class="text-center mt-3">
+
+            <button type="submit"
+                    class="btn btn-primary">
+                Update
+            </button>
+
+            <a href="/"
+               class="btn btn-secondary">
+                Kembali
+            </a>
+
+        </div>
+
+    </form>
+
+</div>
+```
+
+</div>
+
+<script src="{{ url_for('static', filename='script.js') }}"></script>
+
+</body>
+</html>
